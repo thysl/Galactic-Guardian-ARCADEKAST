@@ -103,14 +103,14 @@ enemy_laser_img = pygame.transform.scale(enemy_laser_img, (enemy_laser_width, en
 enemy_lasers = []
 
 # Sounds
-explosion_sound = pygame.mixer.Sound('assets/sounds/explosion.wav')
-laser_sound = pygame.mixer.Sound('assets/sounds/laser.wav')
-powerup_sound = pygame.mixer.Sound('assets/sounds/powerup.wav')
-click_sound = pygame.mixer.Sound('assets/sounds/click.wav')
-game_over_sound = pygame.mixer.Sound('assets/sounds/game_over.wav')
-enemy_laser_sound = pygame.mixer.Sound('assets/sounds/enemy_laser.wav')
+# explosion_sound = pygame.mixer.Sound('assets/sounds/explosion.wav')
+# laser_sound = pygame.mixer.Sound('assets/sounds/laser.wav')
+# powerup_sound = pygame.mixer.Sound('assets/sounds/powerup.wav')
+# click_sound = pygame.mixer.Sound('assets/sounds/click.wav')
+# game_over_sound = pygame.mixer.Sound('assets/sounds/game_over.wav')
+# enemy_laser_sound = pygame.mixer.Sound('assets/sounds/enemy_laser.wav')
 
-main_theme_music = pygame.mixer.music.load('assets/sounds/music/main_theme.wav')
+# main_theme_music = pygame.mixer.music.load('assets/sounds/music/main_theme.wav')
 
 # GUI
 game_over_img = pygame.image.load('assets/game_over.png')
@@ -305,14 +305,14 @@ def create_enemy():
 
 def create_laser():
     global lasers
-    pygame.mixer.Sound.play(laser_sound)
+    # pygame.mixer.Sound.play(laser_sound)
     lasers.append((spaceship_x + spaceship_width / 2 - laser_width / 2, spaceship_y - laser_height))
 
 def create_enemy_laser(enemy):
     global enemy_lasers
     enemy_x = enemy[0]
     enemy_y = enemy[1]
-    pygame.mixer.Sound.play(enemy_laser_sound)
+    # pygame.mixer.Sound.play(enemy_laser_sound)
     enemy_lasers.append((enemy_x + enemy_width / 2 - enemy_laser_width / 2, enemy_y + enemy_height + enemy_laser_speed))
 
 
@@ -350,8 +350,8 @@ def control_laser():
                         enemies.remove(enemy)
                         score += 1
                         add_explosion(center_image(explosion_gif[0], (enemy[0] + enemy_width / 2, enemy[1] + enemy_height / 2)))
-                        pygame.mixer.stop()
-                        pygame.mixer.Sound.play(explosion_sound)
+                        # pygame.mixer.stop()
+                        # pygame.mixer.Sound.play(explosion_sound)
                         del lasers[index]
                         broke = True
                 for enemy_laser in enemy_lasers:
@@ -379,9 +379,9 @@ def control_enemy_laser():
         elif not broke:
             if check_collision(enemy_laser, (spaceship_x, spaceship_y), enemy_laser_width, enemy_laser_height, spaceship_width, spaceship_height):
                 enemy_lasers.remove(enemy_laser)
-                pygame.mixer.stop()
-                pygame.mixer.Sound.play(explosion_sound)
-                pygame.mixer.Sound.play(game_over_sound)
+                # pygame.mixer.stop()
+                # pygame.mixer.Sound.play(explosion_sound)
+                # pygame.mixer.Sound.play(game_over_sound)
                 global game_over
                 game_over = True
                 return None
@@ -390,8 +390,8 @@ def control_enemy_laser():
                     if check_collision(enemy_laser, enemy, enemy_laser_width, enemy_laser_height, enemy_width, enemy_height):
                         enemies.remove(enemy)
                         add_explosion(center_image(explosion_gif[0], (enemy[0] + enemy_width / 2, enemy[1] + enemy_height / 2)))
-                        pygame.mixer.stop()
-                        pygame.mixer.Sound.play(explosion_sound)
+                        # pygame.mixer.stop()
+                        # pygame.mixer.Sound.play(explosion_sound)
                         del enemy_lasers[index]
                         broke = True
         if not broke:
@@ -486,7 +486,7 @@ def create_shop():
     global strong_laser
     global laser_img
     global magnet_laser
-    pygame.mixer.music.pause()
+    # pygame.mixer.music.pause()
     def draw():
         display.fill(background_colour)
         display_text('Points: ' + str(score), (10, 10), 20, False)
@@ -561,9 +561,9 @@ def create_shop():
 
         # Continue button
         if surface_clicked(continue_button_img, (350, 600), True):
-            pygame.mixer.stop()
-            pygame.mixer.Sound.play(click_sound)
-            pygame.mixer.music.unpause()
+            # pygame.mixer.stop()
+            # pygame.mixer.Sound.play(click_sound)
+            # pygame.mixer.music.unpause()
             shopping = False
 
         set_prices()        
@@ -574,7 +574,7 @@ def create_shop():
             if surface_clicked(buy_button_img, (550, 100), False) and score >= firing_rate_price and fire_interval > 2:
                 score -= firing_rate_price
                 fire_interval -= 1
-                pygame.mixer.Sound.play(powerup_sound)
+                # pygame.mixer.Sound.play(powerup_sound)
                 set_prices()
                 draw()
                 time.sleep(0.5)
@@ -588,7 +588,7 @@ def create_shop():
                 laser_width = 10
                 laser_img = pygame.image.load('assets/laser.png')
                 laser_img = pygame.transform.scale(laser_img, (laser_width, laser_height))
-                pygame.mixer.Sound.play(powerup_sound)
+                # pygame.mixer.Sound.play(powerup_sound)
                 set_prices()
                 draw()
                 time.sleep(0.5)
@@ -598,7 +598,7 @@ def create_shop():
             if surface_clicked(buy_button_img, (550, 200), False) and score >= magnet_laser_price and magnet_laser < 50:
                 score -= magnet_laser_price
                 magnet_laser += 25
-                pygame.mixer.Sound.play(powerup_sound)
+                # pygame.mixer.Sound.play(powerup_sound)
                 set_prices()
                 draw()
                 time.sleep(0.5)
@@ -611,7 +611,7 @@ def create_shop():
                 speed += 5
                 accel += 1
                 deccel += 1
-                pygame.mixer.Sound.play(powerup_sound)
+                # pygame.mixer.Sound.play(powerup_sound)
                 set_prices()
                 draw()
                 time.sleep(0.5)
@@ -654,13 +654,13 @@ def main_game_loop():
     stopwatch_func()
     pygame.display.flip()
     if surface_clicked(pause_button_img, (663.5, 37.5), True):
-        pygame.mixer.stop()
-        pygame.mixer.Sound.play(click_sound)
+        # pygame.mixer.stop()
+        # pygame.mixer.Sound.play(click_sound)
         paused = True
         return None
     if surface_clicked(shop_icon_img, (663.5, 100), True):
-        pygame.mixer.stop()
-        pygame.mixer.Sound.play(click_sound)
+        # pygame.mixer.stop()
+        # pygame.mixer.Sound.play(click_sound)
         shopping = True
         return None
 
@@ -695,7 +695,7 @@ def main_game_loop():
 # global laser_width
 # global magnet_laser
 
-pygame.mixer.music.play(-1)
+# pygame.mixer.music.play(-1)
 while True:
     while not game_over and not paused and not shopping:
         main_game_loop()
@@ -705,7 +705,7 @@ while True:
     curr_speed_y = 0
 
     if paused:
-        pygame.mixer.music.pause()
+        # pygame.mixer.music.pause()
         display_text('PAUSED', (350, 250), 75, True)
         display.blit(continue_button_img, center_image(continue_button_img, (350, 375)))
         pygame.display.flip()
@@ -714,9 +714,9 @@ while True:
         check_events()
         clock.tick(60)
         if surface_clicked(continue_button_img, (350, 375), True):
-            pygame.mixer.stop()
-            pygame.mixer.Sound.play(click_sound)
-            pygame.mixer.music.unpause()
+            # pygame.mixer.stop()
+            # pygame.mixer.Sound.play(click_sound)
+            # pygame.mixer.music.unpause()
             paused = False
 
     while shopping:
@@ -724,7 +724,7 @@ while True:
 
 
     if game_over:
-        pygame.mixer.music.stop()
+        # pygame.mixer.music.stop()
         display.fill(background_colour)
         display_text('GAME OVER', (350, 250), 75, True)
         display.blit(play_again_img, center_image(play_again_img, (350, 375)))
@@ -734,8 +734,8 @@ while True:
         check_events()
         clock.tick(60)
         if (surface_clicked(play_again_img, (350, 375), True)):
-            pygame.mixer.music.stop()
-            pygame.mixer.Sound.play(click_sound)
+            # pygame.mixer.music.stop()
+            # pygame.mixer.Sound.play(click_sound)
             game_over = False
 
             spaceship_x = width / 2 - spaceship_width / 2
@@ -749,7 +749,7 @@ while True:
             fire_interval = 5
             ammo = 5
             explosions = []
-            pygame.mixer.music.play(-1)
+            # pygame.mixer.music.play(-1)
             speed = 10
             accel = 1
             deccel = 1
