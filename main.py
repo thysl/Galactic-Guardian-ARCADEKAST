@@ -727,13 +727,16 @@ while True:
         # pygame.mixer.music.stop()
         display.fill(background_colour)
         display_text('GAME OVER', (350, 250), 75, True)
-        display.blit(play_again_img, center_image(play_again_img, (350, 375)))
+        display_text("Press any key to restart", (350, 350), 25, True)
         pygame.display.flip()
 
     while game_over:
         check_events()
         clock.tick(60)
-        if (surface_clicked(play_again_img, (350, 375), True)):
+        keys = pygame.key.get_pressed()
+        if (keys[pygame.K_q] or keys[pygame.K_e] or keys[pygame.K_r] or keys[pygame.K_z] or keys[pygame.K_x] or keys[pygame.K_c] or
+                keys[pygame.K_w] or keys[pygame.K_a] or keys[pygame.K_s] or keys[pygame.K_d] or keys[pygame.K_i] or keys[pygame.K_o] or keys[pygame.K_o] or
+                keys[pygame.K_b] or keys[pygame.K_n] or keys[pygame.K_m]):
             # pygame.mixer.music.stop()
             # pygame.mixer.Sound.play(click_sound)
             game_over = False
